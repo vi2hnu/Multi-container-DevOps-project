@@ -2,16 +2,22 @@ package database
 
 import (
     "context"
+    "os"
     "fmt"
     "log"
     "time"
     "go.mongodb.org/mongo-driver/mongo"
     "go.mongodb.org/mongo-driver/mongo/options"
+    "github.com/joho/godotenv"
 )
 
 func ConnectDB() *mongo.Client {
+    err := godotenv.Load()
+    if err != nil {
+        log.Fatal("Failed to load .env file")
+    }
     clientOptions := options.Client().
-        ApplyURI("mongodb+srv://vishnuvaradhankr:vishnu%401606@cluster0.rxoorl0.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+        ApplyURI(os.Getenv("DATABASE_URI"))
 
     client, err := mongo.NewClient(clientOptions)
     if err != nil {

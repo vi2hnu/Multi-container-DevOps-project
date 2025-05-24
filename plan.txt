@@ -2,7 +2,7 @@
 
     Write a web application in React/Vue/Angular
 
-    Write a REST API in Flask/Django/GoGin/whatever hooked to a database like Postgres
+    Write a REST API in Flask/Django/GoGin/whatever hooked to a database like Postgres          -done
 
     Make your web application create and consume content from the API, locally at first.
 

@@ -9,8 +9,14 @@ import (
     "github.com/vi2hnu/devops-url_shortener/models"
     "github.com/vi2hnu/devops-url_shortener/database"
 	"go.mongodb.org/mongo-driver/mongo"
+    "github.com/redis/go-redis/v9"
 
 )
+var rdb *redis.Client
+
+func InitRedisClient(client *redis.Client) {
+	rdb = client
+}
 
 var seededRand *rand.Rand = rand.New(rand.NewSource(time.Now().UnixNano()))
 const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
@@ -28,6 +34,15 @@ func CreateNewURL(ctx *gin.Context) {
 
     if err := ctx.ShouldBindJSON(&newUrl); err != nil {
         ctx.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request body"})
+        return
+    }
+
+    cachedOriginalUrl, err := rdb.Get(ctx, newUrl.OriginalUrl).Result()
+    if err == nil {
+        ctx.JSON(http.StatusCreated, gin.H{
+            "original_url":  newUrl.OriginalUrl,
+            "shortened_url": cachedOriginalUrl,
+        })
         return
     }
 
@@ -49,7 +64,7 @@ func CreateNewURL(ctx *gin.Context) {
             ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to save URL"})
             return
         }
-
+        rdb.Set(ctx, newUrl.OriginalUrl, newUrl.ShortenedUrl, 24*time.Hour)
         ctx.JSON(http.StatusCreated, gin.H{
             "id":            res.InsertedID,
             "original_url":  newUrl.OriginalUrl,
