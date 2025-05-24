@@ -10,5 +10,6 @@ func Newurl(r *gin.Engine){
 	url:= r.Group("/create")
 	{
 		url.POST("/",controllers.CreateNewURL)
+		url.POST("",controllers.CreateNewURL)
 	}
 }

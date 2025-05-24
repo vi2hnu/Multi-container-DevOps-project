@@ -1,10 +1,10 @@
 
 
-    Write a web application in React/Vue/Angular
+    Write a web application in React/Vue/Angular                                                -done
 
     Write a REST API in Flask/Django/GoGin/whatever hooked to a database like Postgres          -done
 
-    Make your web application create and consume content from the API, locally at first.
+    Make your web application create and consume content from the API, locally at first.        -done
 
     Write Dockerfiles for both projects and publish to a container registry like ghcr.io
 

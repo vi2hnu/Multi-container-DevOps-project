@@ -18,6 +18,11 @@ var ctx = context.Background()
 func main(){
 	//init
 	router:= gin.Default()
+	router.Static("/static", "../frontend/build/static")
+
+	router.NoRoute(func(c *gin.Context) {
+		c.File("../frontend/build/index.html")
+	})
 	err := godotenv.Load()
     if err != nil {
         log.Fatal("Error loading .env file")
