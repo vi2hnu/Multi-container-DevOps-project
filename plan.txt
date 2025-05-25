@@ -1,12 +1,16 @@
 
+    DONE:
 
-    Write a web application in React/Vue/Angular                                                -done
+    Write a web application in React/Vue/Angular                                                -completed on day 1
 
-    Write a REST API in Flask/Django/GoGin/whatever hooked to a database like Postgres          -done
+    Write a REST API in Flask/Django/GoGin/whatever hooked to a database like Postgres          -completed on day 1
 
-    Make your web application create and consume content from the API, locally at first.        -done
+    Make your web application create and consume content from the API, locally at first.        -completed on day 1
 
-    Write Dockerfiles for both projects and publish to a container registry like ghcr.io
+    Write Dockerfiles for both projects and publish to a container registry like ghcr.io        -completed on day 2
+
+
+    TO DO:
 
     Deploy both containers with the solution of your choice, be it on a single node Docker runtime, or even a Kubernetes cluster.
 

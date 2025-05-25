@@ -1,7 +1,6 @@
 package main
 
 import (
-	"context"
 	"os"
 	"log"
 	"github.com/gin-gonic/gin"
@@ -12,8 +11,6 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/gin-contrib/cors"
 )
-
-var ctx = context.Background()
 
 func main() {
 	// init
