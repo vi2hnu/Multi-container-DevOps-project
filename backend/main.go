@@ -10,35 +10,42 @@ import (
 	"github.com/vi2hnu/devops-url_shortener/database"
 	"github.com/vi2hnu/devops-url_shortener/routes"
 	"github.com/joho/godotenv"
+	"github.com/gin-contrib/cors"
 )
 
 var ctx = context.Background()
 
+func main() {
+	// init
+	router := gin.Default()
 
-func main(){
-	//init
-	router:= gin.Default()
-	router.Static("/static", "../frontend/build/static")
+	// CORS middleware
+	router.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"http://localhost:3000","http://192.168.29.117:3000"},
+		AllowMethods:     []string{"GET", "POST", "OPTIONS"},
+		AllowHeaders:     []string{"Origin", "Content-Type"},
+		ExposeHeaders:    []string{"Content-Length"},
+		AllowCredentials: true,
+	}))
 
-	router.NoRoute(func(c *gin.Context) {
-		c.File("../frontend/build/index.html")
-	})
 	err := godotenv.Load()
-    if err != nil {
-        log.Fatal("Error loading .env file")
-    }
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+
 	database.DB = database.ConnectDB()
 	database.CreateIndexes(database.DB)
+
 	rdb := redis.NewClient(&redis.Options{
-        Addr:     os.Getenv("REDIS_PORT"),
-        Password: os.Getenv("REDIS_PASSWORD"), 
-        DB:       0,
-    })
+		Addr:     os.Getenv("REDIS_PORT"),
+		Password: os.Getenv("REDIS_PASSWORD"),
+		DB:       0,
+	})
 	controllers.InitRedisClient(rdb)
 
-	
-	//routes
+	// routes
 	routes.Newurl(router)
 	routes.Redirect(router)
+
 	router.Run(os.Getenv("PORT"))
 }

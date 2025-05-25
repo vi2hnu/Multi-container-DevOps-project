@@ -18,8 +18,6 @@ export function Home() {
             const data = await response.json();
             if (data.shortened_url) {
                 setShortenedUrl(`shortened url: http://localhost:5000/${data.shortened_url}`);
-            } else {
-                setShortenedUrl("Shortened URL returned");
             }
         } catch (err) {
             console.error("Error:", err);
