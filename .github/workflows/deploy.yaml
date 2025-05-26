@@ -1,0 +1,28 @@
+name: CD pipeline
+
+on:
+  workflow_run:
+    workflows: ["CI pipeline"]
+    types:
+      - completed
+
+jobs:
+  deploy:
+
+    runs-on: ubuntu-latest
+
+
+    steps:
+    - uses:actions/checkout@v4
+
+    - name: pulling latest docker image
+      run: sudo docker compose pull
+
+    - name: Stopping running containers
+      run: sudo docker compose down
+
+    - name: deleting old docker image
+      run: sudo docker image prune -f
+
+    - name: starting up docker service
+      run: sudo docker compose up -d
