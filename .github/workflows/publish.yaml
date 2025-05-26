@@ -21,11 +21,11 @@ jobs:
     - name: Build & push backend
       run: |
         cd backend
-        docker build . --tag ghcr.io/vi2hnu/devops_project-backend:latest
-        docker push ghcr.io/vi2hnu/devops_project-backend:latest
+        docker build . --tag ghcr.io/vi2hnu/devops_project-backend:${{ vars.VERSION_TAG}}
+        docker push ghcr.io/vi2hnu/devops_project-backend:${{ vars.VERSION_TAG}}
 
     - name: Build & push frontend
       run: |
         cd frontend
-        docker build . --tag ghcr.io/vi2hnu/devops_project-frontend:latest
-        docker push ghcr.io/vi2hnu/devops_project-frontend:latest
+        docker build . --tag ghcr.io/vi2hnu/devops_project-frontend:${{ vars.VERSION_TAG}}
+        docker push ghcr.io/vi2hnu/devops_project-frontend:${{ vars.VERSION_TAG}}
