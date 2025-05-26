@@ -1,0 +1,24 @@
+name: CI pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+
+  build-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build & push backend
+      run: |
+        cd backend
+        docker build . --tag ghcr.io/vi2hnu/devops_project-backend:latest
+        docker push ghcr.io/vi2hnu/devops_project-backend:latest
+
+    - name: Build & push frontend
+      run: |
+        cd frontend
+        docker build . --tag ghcr.io/vi2hnu/devops_project-frontend:latest
+        docker push ghcr.io/vi2hnu/devops_project-frontend:latest
