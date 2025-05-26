@@ -8,21 +8,24 @@ on:
 
 jobs:
   deploy:
-
     runs-on: ubuntu-latest
-
 
     steps:
     - uses: actions/checkout@v4
 
-    - name: pulling latest docker image
+    - name: Create backend/.env
+      run: |
+        mkdir -p backend
+        echo "${{ secrets.ENV_SECRECT }}" > backend/.env
+
+    - name: Pull latest docker image
       run: sudo docker compose pull
 
-    - name: Stopping running containers
+    - name: Stop running containers
       run: sudo docker compose down
 
-    - name: deleting old docker image
+    - name: Delete old docker image
       run: sudo docker image prune -f
 
-    - name: starting up docker service
+    - name: Start up docker service
       run: sudo docker compose up -d
