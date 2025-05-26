@@ -1,15 +1,17 @@
 package main
 
 import (
-	"os"
+	"fmt"
 	"log"
+	"os"
+
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 	"github.com/redis/go-redis/v9"
 	"github.com/vi2hnu/devops-url_shortener/controllers"
 	"github.com/vi2hnu/devops-url_shortener/database"
 	"github.com/vi2hnu/devops-url_shortener/routes"
-	"github.com/joho/godotenv"
-	"github.com/gin-contrib/cors"
 )
 
 func main() {
@@ -43,6 +45,6 @@ func main() {
 	// routes
 	routes.Newurl(router)
 	routes.Redirect(router)
-
+	fmt.Print("running on port",os.Getenv("PORT"))
 	router.Run(os.Getenv("PORT"))
 }
