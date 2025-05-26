@@ -3,7 +3,6 @@ package controllers
 import (
     "context"
     "net/http"
-    "fmt"
     "time"
     "math/rand"
     "github.com/gin-gonic/gin"
@@ -31,7 +30,6 @@ func StringWithCharset(length int, charset string) string {
 }
 
 func CreateNewURL(ctx *gin.Context) {
-    fmt.Print("got data");
     var newUrl models.Url
     if err := ctx.ShouldBindJSON(&newUrl); err != nil {
         ctx.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request body"})
