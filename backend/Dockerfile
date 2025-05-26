@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
 #base image
-FROM golang:1.24
+FROM golang:1.24-alpine
 
 #to create a working dir
 WORKDIR /app
