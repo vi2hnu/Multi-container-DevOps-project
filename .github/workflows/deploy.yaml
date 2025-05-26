@@ -13,7 +13,7 @@ jobs:
 
 
     steps:
-    - uses:actions/checkout@v4
+    - uses: actions/checkout@v4
 
     - name: pulling latest docker image
       run: sudo docker compose pull
