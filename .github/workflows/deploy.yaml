@@ -17,12 +17,16 @@ jobs:
       run: |
         mkdir -p backend
         echo "${{ secrets.ENV_SECRECT }}" > backend/.env
+        
+    - name: Stop running containers
+      run: sudo docker compose down
+
+    - name: Replace version tag in docker-compose
+      run: |
+        sed -i "s/\${VERSION_TAG}/${{ vars.VERSION_TAG }}/g" docker-compose.yml
 
     - name: Pull latest docker image
       run: sudo docker compose pull
-
-    - name: Stop running containers
-      run: sudo docker compose down
 
     - name: Delete old docker image
       run: sudo docker image prune -f
