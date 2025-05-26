@@ -9,13 +9,19 @@
 
     Write Dockerfiles for both projects and publish to a container registry like ghcr.io        -completed on day 2
 
+    Implement CI using github actions                                                           -completed on day 3
+
+    Upload the docker files to aws                                                              -completed on day 3
+
+    Implement CD to automatically pull and build in aws                                         -completed on day 3
+    
 
     TO DO:
 
+    Integrate unit testing
+        
     Use a reverse proxy like nginx
 
-    Implement CI using github actions and integrate unit testing
-
-    Upload the docker files to aws
     
-    Implement CD to automatically pull and build in aws
+    
+    
