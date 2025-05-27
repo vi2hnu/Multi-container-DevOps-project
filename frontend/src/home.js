@@ -21,7 +21,7 @@ export function Home() {
             }
         } catch (err) {
             console.error("Error:", err);
-            setShortenedUrl("An error occurred. Please try again.");
+            setShortenedUrl("An error occurred. Please try again. ");
         }
     };
 
