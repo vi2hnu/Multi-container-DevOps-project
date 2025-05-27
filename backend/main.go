@@ -18,6 +18,7 @@ func main() {
 	// init
 	router := gin.Default()
 
+	
 	// CORS middleware
 	router.Use(cors.New(cors.Config{
 		AllowOrigins:     []string{"*"},
