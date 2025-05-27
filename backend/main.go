@@ -41,7 +41,7 @@ func main() {
 		DB:       0,
 	})
 	controllers.InitRedisClient(rdb)
-
+ 
 	// routes
 	routes.Newurl(router)
 	routes.Redirect(router)
