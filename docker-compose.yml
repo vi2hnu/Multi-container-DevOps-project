@@ -9,6 +9,7 @@ services:
     depends_on:
       - redis
 
+
   frontend:
     build:
       context: ./frontend
