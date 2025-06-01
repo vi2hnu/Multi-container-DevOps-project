@@ -8,13 +8,22 @@ on:
 
 jobs:
   deploy:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
+ 
+    - name: Create backend/.env
+      run: |
+        mkdir -p backend
+        echo "${{ secrets.ENV_SECRECT }}" > backend/.env
         
     - name: Stop running containers
       run: sudo docker compose down
+
+    - name: Replace version tag in docker-compose
+      run: |
+        sed -i "s/\${VERSION_TAG}/${{ vars.VERSION_TAG }}/g" docker-compose.yml
 
     - name: Pull latest docker image
       run: sudo docker compose pull

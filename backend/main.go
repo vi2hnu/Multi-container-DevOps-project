@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"os"
 
@@ -43,5 +44,6 @@ func main() {
 	// routes
 	routes.Newurl(router)
 	routes.Redirect(router)
+	fmt.Print("running on port",os.Getenv("PORT"))
 	router.Run(os.Getenv("PORT"))
 }
